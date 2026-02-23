@@ -12,7 +12,7 @@
       document.addEventListener('keydown', (event) => {
         if (event.key == sequence[current]) current++;
         if (event.key != sequence[current]) current = 0;
-        if (current == sequence.length() - 1) document.body.innerHTML.replace("sa.flac", "wyg.flac");
+        if (current == sequence.length - 1) document.body.innerHTML.replace("sa.flac", "wyg.flac");
         sa = document.getElementById('aperture-science');
         if (sa) {
           sa.play();
