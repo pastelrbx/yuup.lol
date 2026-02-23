@@ -3,16 +3,20 @@
     fetch("source.html").then(res => res.text()).then(html => {
       document.body.innerHTML = html;
 
-      const sa = document.getElementById('aperture-science');
+      let sa = document.getElementById('aperture-science');
       if (sa) {
         sa.play();
       }
-      const sequence = ["w","e","l","l"," ","h","e","r","e"," ","w","e"," ","a","r","e"," ","a","g","a","i","n"]
+      const sequence = ["w", "e", "l", "l", " ", "h", "e", "r", "e", " ", "w", "e", " ", "a", "r", "e", " ", "a", "g", "a", "i", "n"]
       let current = 0
       document.addEventListener('keydown', (event) => {
         if (event.key == sequence[current]) current++;
-        if (event.key != sequence[current]) current=0;
-        if (current == sequence.length()-1) document.body.innerHTML.replace("sa.flac", "wyg.flac");
+        if (event.key != sequence[current]) current = 0;
+        if (current == sequence.length() - 1) document.body.innerHTML.replace("sa.flac", "wyg.flac");
+        sa = document.getElementById('aperture-science');
+        if (sa) {
+          sa.play();
+        }
       });
     });
   }
