@@ -10,8 +10,9 @@
       const sequence = ["w","e","l","l"," ","h","e","r","e"," ","w","e"," ","a","r","e"," ","a","g","a","i","n"]
       let current = 0
       document.addEventListener('keydown', (event) => {
-        if (event.key == sequence[current]) current++
-        if (current == sequence.length()) document.body.innerHTML.replace("sa.flac", "wyg.flac")
+        if (event.key == sequence[current]) current++;
+        if (event.key != sequence[current]) current=0;
+        if (current == sequence.length()-1) document.body.innerHTML.replace("sa.flac", "wyg.flac");
       });
     });
   }
