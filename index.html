@@ -1,11 +1,22 @@
 <script>
   function loadSite() {
-    fetch("source.html").then(res => res.text()).then(html => { document.body.innerHTML = html; });
+    fetch("source.html").then(res => res.text()).then(html => {
+      document.body.innerHTML = html;
 
-    const sa = document.getElementById('aperture-science');
-    if (sa) {
-      sa.play();
-    }
+      const sa = document.getElementById('aperture-science');
+      if (sa) {
+        sa.play();
+      }
+      const sequence = ["w","e","l","l"," ","h","e","r","e"," ","w","e"," ","a","r","e"," ","a","g","a","i","n"]
+      let current = 0
+      document.addEventListener('keydown', (event) => {
+        if (event.key == sequence[current]) current++
+        if (current == sequence.length()) document.body.innerHTML.replace("sa.flac", "wyg.flac")
+      });
+    });
+  }
+  if (Navigator.getAutoplayPolicy() == "allowed") {
+    loadSite();
   }
 </script>
 <script src="//github.com/pastelrbx/fengari-web-build/releases/latest/download/fengari-web.js"
