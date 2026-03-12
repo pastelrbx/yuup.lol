@@ -1,37 +1,433 @@
-<script>
-  function loadSite() {
-    fetch("source.html").then(res => res.text()).then(html => {
-      document.body.innerHTML = html;
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>yuup.lol</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --ink: #f6f4ef;
+      --bg: #121212;
+      --acid: #d7ff2f;
+      --danger: #ff3b30;
+      --sky: #46d6ff;
+    }
 
-      let sa = document.getElementById('aperture-science');
-      if (sa) {
-        sa.play();
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "IBM Plex Mono", monospace;
+      color: var(--ink);
+      background-color: var(--bg);
+      background-image:
+        repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0 2px, transparent 2px 16px),
+        radial-gradient(circle at 12% 18%, rgba(215, 255, 47, 0.2), transparent 24%),
+        radial-gradient(circle at 90% 80%, rgba(70, 214, 255, 0.24), transparent 22%);
+      display: grid;
+      place-items: center;
+      padding: 22px;
+      overflow-x: hidden;
+    }
+
+    .loader {
+      width: min(720px, 100%);
+      background: #1e1e1e;
+      border: 3px solid var(--ink);
+      border-radius: 2px;
+      padding: clamp(20px, 4vw, 34px);
+      box-shadow: 10px 10px 0 var(--danger), -10px -10px 0 var(--sky);
+      position: relative;
+      overflow: hidden;
+      animation: stomp .45s cubic-bezier(.1, .8, .3, 1) both;
+    }
+
+    .loader::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(108deg, transparent 0 58%, rgba(215, 255, 47, 0.15) 58% 100%);
+      pointer-events: none;
+    }
+
+    .loader h1 {
+      position: relative;
+      margin: 0;
+      font-family: "Bebas Neue", sans-serif;
+      font-size: clamp(3rem, 12vw, 7rem);
+      line-height: .88;
+      letter-spacing: .02em;
+      color: var(--acid);
+      text-shadow: 3px 3px 0 #000;
+    }
+
+    .loader p {
+      position: relative;
+      margin: 10px 0 20px;
+      max-width: 42ch;
+      font-size: .93rem;
+      color: #d9d9d9;
+    }
+
+    .loader button {
+      position: relative;
+      border: 2px solid #000;
+      border-radius: 0;
+      padding: 12px 16px;
+      font: 700 .95rem/1 "IBM Plex Mono", monospace;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      background: var(--acid);
+      color: #000;
+      cursor: pointer;
+      box-shadow: 6px 6px 0 #000;
+      transition: transform .14s ease, box-shadow .14s ease;
+    }
+
+    .loader button:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 8px 8px 0 #000;
+    }
+
+    .loader button:focus-visible {
+      outline: 3px solid var(--sky);
+      outline-offset: 3px;
+    }
+
+    @keyframes stomp {
+      from {
+        opacity: 0;
+        transform: translateY(14px) scale(.96) rotate(-1deg);
       }
-      const sequence = ["w", "e", "l", "l", " ", "h", "e", "r", "e", " ", "w", "e", " ", "a", "r", "e", " ", "a", "g", "a", "i", "n"]
-      let current = 0
-      document.addEventListener('keydown', (event) => {
-        if (event.key != sequence[current]) current = 0;
-        if (event.key == sequence[current]) current++;
-        if (current == sequence.length) {
-          console.log("wow");
-          document.body.innerHTML = document.body.innerHTML.replace("sa.flac", "wyg.flac")
-          sa = document.getElementById('aperture-science');
-          if (sa) {
-            sa.play();
-          }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotate(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <main id="app" class="loader">
+    <h1>YUUP.LOL</h1>
+    <p>Yes this is very vibecoded, (yuup.)lol.</p>
+    <button id="open-site" type="button">ENTER SITE</button>
+  </main>
+
+  <script>
+    const SECRET = ["w", "e", "l", "l", " ", "h", "e", "r", "e", " ", "w", "e", " ", "a", "r", "e", " ", "a", "g", "a", "i", "n"];
+    const TAGLINE_PGP_CLEARSIGNED_MESSAGES = [
+      `
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+and that kids is why you dont use an unstandardized standard
+
+-----BEGIN PGP SIGNATURE-----
+
+wsG7BAEBCgBvBYJpsqRYCRB6x4ku/ROtrUcUAAAAAAAeACBzYWx0QG5vdGF0aW9u
+cy5zZXF1b2lhLXBncC5vcmd9jrKxBNhRd0e1RaoH+PqztY2KAZsGBk58SgPVPB8k
+CxYhBMICSdRpvyMHpB78SnrHiS79E62tAAA74Q/+NF3537HthGlbF5qSgwtZDmRW
+3DEOydUvfsnGT98RdBafmEIws2pVEWc7t6nBe3FyuOWkpozledNe/1AuwnsA5dRW
+iWYLcJppBb3DDpktUZXaiWknqn74vRv9/R2hD7CnUKIcMoeH3+zDhFbWgQtKvE1p
+lC6gaEeFcbzAxsVZbk7Xe/ihbcIUduKpATq7qM6fP5RQ2SmhiGokEseRgCEMx9wj
+Kt3F6hp88G+CdDnWApqUBU7NXQw1weVhcteDbOVRAaAJr7O57Jv/+qzEgCps12K3
+vAEsMufzVLfode/zmPQU1BMFNyVO9AWDJ9wtQ84PvNuSz0P9w5zmAVl0+nr9EDAn
+t2v80DX+0HlwL38Prvz32dYZn2Uuxra38q92/qlvcY5BdkCgfjJEPcBCFSOCr4OH
+zigIe3KvxOfugXkMo+Es5lfkue/wO/48/PotsL1G8/26FMUxyI2/Fpb1bqgQXS+I
+5uecG3hBJjai9n76KxlqZ+KwEnXQHmqidv9o7Svro5bxYjyq+dxWQML6nkNEkkee
+Q6fwwgdGaFPTjzSyyNWXDEuTcAwaZPyUr8weMxd3Wz5jZBYN+kgMJP5fP8J6VAdv
+q51QA+wXoKHiIas0gqstTBi8BnPKaIeXGqVSqCZ7mvMZYOYoT6oFrmqZU8BzuI0K
+hx9D1Xj1Y2jW9FTovds=
+=Vftv
+-----END PGP SIGNATURE-----
+      `.trim(),
+      `
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+me and stan js fucked up atnt
+
+-----BEGIN PGP SIGNATURE-----
+
+wsG7BAEBCgBvBYJpsrUKCRB6x4ku/ROtrUcUAAAAAAAeACBzYWx0QG5vdGF0aW9u
+cy5zZXF1b2lhLXBncC5vcme7m4xJjgT2mc4T0l29pDyPcZx6m2DIiFyg6uyuwGzR
+hhYhBMICSdRpvyMHpB78SnrHiS79E62tAAC6/Q//Zj3QdGkv3yyT3Ol2Ohb6V+xn
+IDH0fhXazIU+V/57zAv7wo+NOcoa4ITFgkVs8n+RHkV2O5OL2fuPT4IAlmZazdq2
+LVB1D02e4fkGfuOAlUt2LyWNJTeR2UPVT7ICtYI+WE0OrQL6TDxuJWzNqNYssmg/
+7nHcOvL/0e9DIS8W1B3k/vaU4QVHJiMzV/Y8z+z7j7rESkErGazCspcH8aXzUAVM
+hJ/aVYw4w5eHUafpU33w2cvb9Gr5+q3sUa5NndgcJ3L/aWVInvzHnkoOoggmW1QY
+SpUYAlDeImKKhrfDMUoVt8Tjy1JdLD2LfyqI2zlwhU7Y4VC12wiOFP1v9QtqAyjB
+oX/zr0IsI6G9F3enBMxVmitxm7g1OKH4PXJoqAOzoj80Hib4UQSG5UmyRSmGituN
+M0K0cfJZBg74SUtZ+21OdOIwQDof2ru0SEbV/fW5bykjQqRSc+tn5MYNZKpLfh72
+5ogfUObh/kzsGvUDXhRw6yvuU770vGFUz4xbZDZheTVJ2yK/K9uVc+RALQ8bwZks
+fiayBZYleG2aNhzgeBZCpSeCPAt85hA7Nrqc0R7mSL5J6CkyYrSK8net55eHH1ST
+okaxWLdLnD+Z8AKH4gj8QuW4vTRUiHo+w1szNTRQOTYjvVpuI2dliEGA6wHRhryp
+WKiZ+j1tJzU1jr36qM8=
+=/UPM
+-----END PGP SIGNATURE-----
+      `.trim(),
+      `
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+With great power… comes great need to take a nap. Wake me up later.
+
+-----BEGIN PGP SIGNATURE-----
+
+wsG7BAEBCgBvBYJpsrVHCRB6x4ku/ROtrUcUAAAAAAAeACBzYWx0QG5vdGF0aW9u
+cy5zZXF1b2lhLXBncC5vcmd/jvs/TEj1erJUbh5ae2PS6IBdmjRFVkTIeePCd261
+LBYhBMICSdRpvyMHpB78SnrHiS79E62tAAB+2g/+LA7TieneNP9tDcsVE0uGDysB
+h1POBqzWIhuHctdu2VCbEC3h4BVqoQRYhU9VRqU0/usHWI3Cj9XcF5kb1L9HW2Kr
+CKar855yaLbHwVHZyAlCmUkyOwGH1EX4LcHqFcvGneFKNCasakt/qBQgk1hNGZV4
+A8FjmPc2LDNGbR3lnszL3Mc0CwccH7A8fAJekpi8MbJpCCt36UiYDxzKZwjgZTYF
+4rITGlSfoI5rDTpkurkARC42Fy8/Mxa8N5kMl5v2oQpNKDKf25SFgkLvrg/typ93
+K6E4kDKCEhEcn2ogpgSeXKTiQZYIvXbtxRPt/Zvek/bDCK3FpFqTqtU04SU979hI
+cNyxOX0uJliu2zxMNQe70gyFUQlYHHHJ4GyfYiWWZox0tGJgy3Na/ReyFVku6FO8
+N0Uu22d4TbLvw/8blypj2YTFSO2rzfWzMfBh7tjFgk/XD9Tv3y6cKcrlmAS8jISk
+6qYLoaYh+M0pCX7imL6gaWb5V0Z4z3EHgqihyyeLdXUwI5TATpz0vciUjj6V7uHs
+31EUk7pjdzdxnRRDjUHhJz4L9YTNkiaDmpJQ5aoYweAr9e2yU5fKI6lhDpqYGKUP
+wrNi66UlfSteKaftN/cVAPa3jc/Un5Ma9OROL0264/6udbbiNqjkrVDGSemsTcfh
+Wd6WV8Z9NUqNagI/i68=
+=l69J
+-----END PGP SIGNATURE-----
+      `.trim(),
+      `
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+yixi xini
+
+-----BEGIN PGP SIGNATURE-----
+
+wsG7BAEBCgBvBYJpsrWCCRB6x4ku/ROtrUcUAAAAAAAeACBzYWx0QG5vdGF0aW9u
+cy5zZXF1b2lhLXBncC5vcmdm7GWuGSFYr5SsgILI2YjYF4tkAnJBotr6NXy6YgC1
+axYhBMICSdRpvyMHpB78SnrHiS79E62tAAANtBAAggUXO3/4aNJCXVM1oSIVEz5T
+O/CXMCvFtXYxPct1DQfAFCnTc7Em1evbuJ10fAHtsjaGcIdCxxj1pacP8r2FSVtF
+Mv+5Laj33jTWPO+0qvBpWxxSArGLw9DwUDnWUT0vvhcK6KprFOuNC1Szx/K75I+l
+FxVrIeByBzFZ1gqneIuaJBWCtE8reG+PfNfZS2MooRxXumYcxy8XzbmXHMr6ztLM
+cmIlLxAuSWFIqS2thspA2FBjr78FkyIpYoJtsrVAbcP1r8VxlaG09MG97yq5oES3
+jaRC12dWnqhl9SYod76LVtsqX8pqNX79vV/DWtITFEQO+9eOa2iNnYuX+iW6lHJv
+5mnPirnZJIBiTuIcOXiX5NHCBpLAa6V+e5EhFv81ZGscrYiqyLmG3o0usUW+agfA
+5+e8nwqMcm+3Y7h9pALrQBwcaZHDP0D6JyeIVmChNX74qapM4TdVYFKdb7fwbBUT
+oTw+kxJZ9t9BLGcOry1LtgD1GzgtQPjj2YjC6NU0qUxDNjWbNN8R2A2PlMFRpBHf
+fO1XAHF+BC6G97tmHYHWHBXfBpTboKICaObTcNjDnqfwwMrm6JlkjPoXQLy30aFJ
+2eCT7/4rQRH1vhtUOIiKiOcY3JsToAh/AUkOD3ePtLc+uMZZqrKu0ygvva4w0Q8U
+G1O9QGnGhBDaXeiRDeA=
+=KDOp
+-----END PGP SIGNATURE-----
+      `.trim()
+    ];
+    const APPROVED_SIGNER_EMAILS = [
+      "blueworldclass@cock.li"
+    ];
+    let keyIndex = 0;
+    let listenerReady = false;
+    let remixMode = false;
+    let currentSignedTagline = "";
+
+    function playTrack() {
+      const player = document.getElementById("aperture-science");
+      if (!player) return;
+      player.play().catch(() => {});
+    }
+
+    function setTrack(remix) {
+      const source = document.querySelector("#aperture-science source");
+      const player = document.getElementById("aperture-science");
+      if (!source || !player) return;
+
+      source.src = remix ? "wyg.flac" : "sa.flac";
+      player.load();
+      playTrack();
+    }
+
+    function initSecretListener() {
+      if (listenerReady) return;
+      listenerReady = true;
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key !== SECRET[keyIndex]) keyIndex = 0;
+        if (event.key === SECRET[keyIndex]) keyIndex += 1;
+
+        if (keyIndex === SECRET.length) {
+          remixMode = true;
+          setTrack(true);
+          keyIndex = 0;
         }
       });
-    });
-  }
-  if (navigator.getAutoplayPolicy("mediaelement") == "allowed") {
-    loadSite();
-  }
-</script>
-<script src="//github.com/pastelrbx/fengari-web-build/releases/latest/download/fengari-web.js"
-  type="text/javascript"></script>
-<script type="application/lua">
+    }
+
+    function setVerifyStatus(text, state) {
+      /*const statusEl = document.getElementById("verify-status");
+      if (!statusEl) return;
+      statusEl.textContent = text;
+      statusEl.classList.remove("ok", "bad");
+      if (state === "ok") statusEl.classList.add("ok");
+      if (state === "bad") statusEl.classList.add("bad");*/
+    }
+
+    function setVerifyEmailStatus(text, state) {
+      const emailEl = document.getElementById("verify-email");
+      if (!emailEl) return;
+      emailEl.textContent = text;
+      emailEl.classList.remove("ok", "bad");
+      if (state === "ok") emailEl.classList.add("ok");
+      if (state === "bad") emailEl.classList.add("bad");
+    }
+
+    function normalizeFingerprint(fingerprint) {
+      return (fingerprint || "").replace(/[^A-Fa-f0-9]/g, "").toUpperCase();
+    }
+
+    function bytesToHex(bytes) {
+      return Array.from(bytes || [])
+        .map((value) => value.toString(16).padStart(2, "0"))
+        .join("")
+        .toUpperCase();
+    }
+
+    function extractFingerprintFromMessage(cleartextMessage) {
+      const packets = cleartextMessage?.signature?.packets || [];
+      for (const packet of packets) {
+        const rawFingerprint = packet?.issuerFingerprint || packet?.issuerKeyFingerprint || packet?.fingerprint;
+        if (rawFingerprint instanceof Uint8Array && rawFingerprint.length > 0) {
+          return bytesToHex(rawFingerprint);
+        }
+        if (typeof rawFingerprint === "string" && rawFingerprint.length > 0) {
+          return normalizeFingerprint(rawFingerprint);
+        }
+      }
+      return "";
+    }
+
+    function extractKeyIdFromMessage(cleartextMessage) {
+      const keyIDs = cleartextMessage?.getSigningKeyIDs ? cleartextMessage.getSigningKeyIDs() : [];
+      const firstKeyID = keyIDs[0];
+      if (!firstKeyID || typeof firstKeyID.toHex !== "function") return "";
+      return normalizeFingerprint(firstKeyID.toHex());
+    }
+
+    function extractEmailsFromUserIDs(userIDs) {
+      return userIDs
+        .map((userID) => {
+          const match = userID.match(/<([^>]+)>/);
+          return (match ? match[1] : "").toLowerCase();
+        })
+        .filter(Boolean);
+    }
+
+    function initSignedTaglineWidget() {
+      const codeEl = document.getElementById("signed-tagline");
+      const verifyButton = document.getElementById("verify-tagline");
+      if (!codeEl || !verifyButton) return;
+
+      if (TAGLINE_PGP_CLEARSIGNED_MESSAGES.length === 0) {
+        codeEl.textContent = "No signed taglines configured.";
+        verifyButton.disabled = true;
+        setVerifyStatus("No Taglines", "bad");
+        return;
+      }
+
+      const randomIndex = Math.floor(Math.random() * TAGLINE_PGP_CLEARSIGNED_MESSAGES.length);
+      currentSignedTagline = TAGLINE_PGP_CLEARSIGNED_MESSAGES[randomIndex];
+      codeEl.textContent = currentSignedTagline;
+      setVerifyStatus("Unverified", "");
+      setVerifyEmailStatus("unknown ❌", "bad");
+
+      verifyButton.addEventListener("click", verifyCurrentSignedTagline);
+    }
+
+    async function verifyCurrentSignedTagline() {
+      if (!currentSignedTagline) {
+        setVerifyStatus("Nothing To Verify", "bad");
+        return;
+      }
+
+      if (!window.openpgp) {
+        setVerifyStatus("Verifier Not Loaded", "bad");
+        return;
+      }
+
+      const cleartextMessage = await openpgp.readCleartextMessage({ cleartextMessage: currentSignedTagline });
+      const normalizedFingerprint = normalizeFingerprint(extractFingerprintFromMessage(cleartextMessage));
+      const signerKeyId = extractKeyIdFromMessage(cleartextMessage);
+      if (!normalizedFingerprint && !signerKeyId) {
+        setVerifyStatus("Missing Fingerprint", "bad");
+        setVerifyEmailStatus("unknown ❌", "bad");
+        return;
+      }
+
+      try {
+        const keyLookupPath = normalizedFingerprint
+          ? `by-fingerprint/${normalizedFingerprint}`
+          : `by-keyid/${signerKeyId}`;
+        const keyResponse = await fetch(`https://keys.openpgp.org/vks/v1/${keyLookupPath}`);
+        if (!keyResponse.ok) {
+          throw new Error("Failed to fetch key");
+        }
+
+        const armoredKey = await keyResponse.text();
+        const verificationKey = await openpgp.readKey({ armoredKey });
+        const verificationResult = await openpgp.verify({
+          message: cleartextMessage,
+          verificationKeys: verificationKey
+        });
+
+        const signature = verificationResult.signatures[0];
+        await signature.verified;
+        const emails = extractEmailsFromUserIDs(verificationKey.getUserIDs ? verificationKey.getUserIDs() : []);
+        const approvedEmailSet = new Set(APPROVED_SIGNER_EMAILS.map((email) => email.toLowerCase()));
+        const approvedSignerEmail = emails.find((email) => approvedEmailSet.has(email));
+
+        if (approvedSignerEmail) {
+          setVerifyStatus("Verified", "ok");
+          setVerifyEmailStatus(`${approvedSignerEmail} ✅`, "ok");
+          return;
+        }
+
+        const linkedEmail = emails[0] || "unknown";
+        setVerifyStatus("Unapproved Email", "bad");
+        setVerifyEmailStatus(`${linkedEmail} ❌`, "bad");
+      } catch (_error) {
+        setVerifyStatus("Invalid Signature", "bad");
+        setVerifyEmailStatus("unknown ❌", "bad");
+      }
+    }
+
+    function loadSite() {
+      fetch("source.html")
+        .then((res) => res.text())
+        .then((html) => {
+          const app = document.getElementById("app");
+          app.className = "";
+          app.innerHTML = html;
+          initSecretListener();
+          setTrack(remixMode);
+          initSignedTaglineWidget();
+        });
+    }
+
+    document.getElementById("open-site").addEventListener("click", loadSite);
+
+    if (typeof navigator.getAutoplayPolicy === "function" &&
+      navigator.getAutoplayPolicy("mediaelement") === "allowed") {
+      loadSite();
+    }
+  </script>
+  <script src="https://unpkg.com/openpgp@5.11.2/dist/openpgp.min.js"
+    type="text/javascript"></script>
+  <script src="//github.com/pastelrbx/fengari-web-build/releases/latest/download/fengari-web.js"
+    type="text/javascript"></script>
+  <script type="application/lua">
 print("hehe check source if ur reading this from console :3\nand vice versa ofc lol")
-</script>
-<button id="fuck-you-w3" onclick="loadSite()">
-  open website
-</button>
+  </script>
+</body>
+</html>
