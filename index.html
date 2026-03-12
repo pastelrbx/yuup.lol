@@ -313,10 +313,26 @@ YkiSzNlGbc5PhiEiPE2WeaXhQ97QEKpzhfjqPeyOY+jwqL7OOHKHS4HGD7pFPlrC
 G2mTtBxxCKYrBMyoRUo=
 =otVq
 -----END PGP SIGNATURE-----
+      `.trim(),
+      `
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+is alting against tos
+
+-----BEGIN PGP SIGNATURE-----
+
+wr0EARYKAG8FgmmyzkAJEPt0wwYQ+6g/RxQAAAAAAB4AIHNhbHRAbm90YXRpb25z
+LnNlcXVvaWEtcGdwLm9yZ1dGpo8gw7YO7rZLaX7veM7PhIgEBpNSmoVmiy4+bduN
+FiEE/0ySGGXf/p1OiaZD+3TDBhD7qD8AANb+AP0V2UMez2XrL+Hh01kB3zSm4aEB
+9jM+DzADPtPtrm7HmQD+Ks0pGJtpIhl25vao2nUcpnTuxbg3EIBJ/znio4IHQgA=
+=3aiC
+-----END PGP SIGNATURE-----
       `.trim()
     ];
     const APPROVED_SIGNER_EMAILS = [
-      "blueworldclass@cock.li"
+      "blueworldclass@cock.li",
+      "banecrewsnorts@cocaine.ninja"
     ];
     const KEYSERVER_BASE_URL = "https://keys.openpgp.org/vks/v1";
     const CORS_PROXY_BASE_URL = "https://simple-proxy.itspastelxx.workers.dev/ts-proxy?url=";
@@ -516,6 +532,7 @@ G2mTtBxxCKYrBMyoRUo=
         setVerifyStatus("Unapproved Email", "bad");
         setVerifyEmailStatus(`${linkedEmail} ❌`, "bad");
       } catch (_error) {
+        console.log("Verification error:", _error);
         setVerifyStatus("Invalid Signature", "bad");
         setVerifyEmailStatus("invalid signature ❌", "bad");
       }
