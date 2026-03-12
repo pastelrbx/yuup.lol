@@ -242,6 +242,8 @@ G1O9QGnGhBDaXeiRDeA=
     const APPROVED_SIGNER_EMAILS = [
       "blueworldclass@cock.li"
     ];
+    const KEYSERVER_BASE_URL = "https://keys.openpgp.org/vks/v1";
+    const CORS_PROXY_BASE_URL = "https://simple-proxy.itspastelxx.workers.dev/ts-proxy?url=";
     let keyIndex = 0;
     let listenerReady = false;
     let remixMode = false;
@@ -333,25 +335,25 @@ G1O9QGnGhBDaXeiRDeA=
       const keyLookupPath = normalizedFingerprint
         ? `by-fingerprint/${normalizedFingerprint}`
         : `by-keyid/${signerKeyId}`;
+      const targetUrl = `${KEYSERVER_BASE_URL}/${keyLookupPath}`;
+      const proxyCandidates = [
+        `${CORS_PROXY_BASE_URL}${targetUrl}`,
+        `${CORS_PROXY_BASE_URL}?url=${encodeURIComponent(targetUrl)}`
+      ];
 
-      try {
-        const keyResponse = await fetch(`https://keys.openpgp.org/vks/v1/${keyLookupPath}`, {
-          mode: "cors",
-          cache: "no-store"
-        });
-        if (keyResponse.ok) {
+      for (const proxiedUrl of proxyCandidates) {
+        try {
+          const keyResponse = await fetch(proxiedUrl, { cache: "no-store" });
+          if (!keyResponse.ok) continue;
           const armoredKey = await keyResponse.text();
+          if (!armoredKey.includes("BEGIN PGP PUBLIC KEY BLOCK")) continue;
           return await openpgp.readKey({ armoredKey });
+        } catch (_error) {
+          // Try next proxy format.
         }
-      } catch (_error) {
-        // Fall back to embedded key below when remote lookup is blocked.
       }
 
-      if (TAGLINE_PGP_PUBLIC_KEY && TAGLINE_PGP_PUBLIC_KEY.includes("BEGIN PGP PUBLIC KEY BLOCK")) {
-        return await openpgp.readKey({ armoredKey: TAGLINE_PGP_PUBLIC_KEY });
-      }
-
-      throw new Error("No verification key available");
+      throw new Error("Proxy key lookup failed");
     }
 
     function extractEmailsFromUserIDs(userIDs) {
