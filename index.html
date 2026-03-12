@@ -237,7 +237,58 @@ fO1XAHF+BC6G97tmHYHWHBXfBpTboKICaObTcNjDnqfwwMrm6JlkjPoXQLy30aFJ
 G1O9QGnGhBDaXeiRDeA=
 =KDOp
 -----END PGP SIGNATURE-----
-      `.trim()
+      `.trim(),
+      `
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+"stah" nonchalantly
+
+-----BEGIN PGP SIGNATURE-----
+
+wsG7BAEBCgBvBYJpsr67CRB6x4ku/ROtrUcUAAAAAAAeACBzYWx0QG5vdGF0aW9u
+cy5zZXF1b2lhLXBncC5vcmfGND0Lj4BVlZmKzjgoi2p3TavGA5lIvOKF8sSjFGZH
++hYhBMICSdRpvyMHpB78SnrHiS79E62tAAAk/g/9FqXcjtTxUlMcqjkHTAZAKJuE
+H+I0ppD8W6HFnOfykkQgluTb40GonBpEUV4/eVyfu2D0W7gFALZ/T94hLGPyCWjC
+2LpUUQETziv3oowN7jKrGyoDLSNhH6DMhctWaCoWCehSvgWWcnLiUrxB1JybapSW
+dnGir3voH8PrFbM4TP3rfc0iFMjT1eIfNYb29PDE7iVlLz8C4+X3grRvdbZJEZra
+qFa4chNvUWBtPNJmyIx3n0ZXYwz3hnkbtiSheo20lrqz55CGI5g31+BwHRFWBE4s
+G6EOdBOALQwM0G9+rtFr0zUwnJQJ+DL/ytmPTDoie5jmTARH+3zTiP9a6u+L0dxK
+8CezE++wPSy2q7xwna0b5nKH+KtIqwjrgTeBXrwYkN3MTgaxoHc8PJJUjS7KYlDL
+BzDlAGzMqaE+89ew1/QfZJm+qakDBjza++500lcfkKhir4ndjeUfhL5LH6nredF7
+KmxdivmVEbj/L4Q+sFzGTdgZzPlLDh3KeIfbR6aH0QwCsY/PM0w+LC3XkT+rOowf
+oeX8RvlqVN8G/Gxp7XJDP2Pq1Y/lz9TJkN+jrH64tYwDTHVaObn5igQBJbilcWBg
+jXTS9KQ7wesbJKDgm0Z+4QjaBhDkGvT7OfM3Z2HtmOuRXHEeJVaYfmTKlBtWzmEj
+nOHKdJGXVw/QsWUBAhA=
+=wAhh
+-----END PGP SIGNATURE-----
+      `.trim(),
+      `
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+I'd rather work my ass off in hell than larp in heaven
+
+-----BEGIN PGP SIGNATURE-----
+
+wsG7BAEBCgBvBYJpsr7uCRB6x4ku/ROtrUcUAAAAAAAeACBzYWx0QG5vdGF0aW9u
+cy5zZXF1b2lhLXBncC5vcmefnDsqCcrsl+2g0pyueLdp0OKCe3MsEMcA3vn1swbC
+gxYhBMICSdRpvyMHpB78SnrHiS79E62tAADaIA/9GZyOO/zo+CPj1qrs7N0lRzC/
+j9eZlhLwwC8m1ySgGOW4LfpEKawkyAyo3v2KrvyN8ggpYDMLpMKiwSRLhGHmv4EL
+JLcoL3+RVwArttXM+ldGD3OK25ZIAopHfAlbcG7T9NHRmbTd7MM0NmpsAozODT28
+SgiJebZR0OGT2rFetTXlD++FiyFu4WgDCPBFyR0zG37ai01GC6N93NRz8G5qs6sQ
+2vkX2B1GUezs0PbOZnYFRVhS173uuvtojL3KogKjVMDYiP9kx/S6q9wVoSoa/yqB
+qxL8gelU2gZcCRajBZnM7SZyq4GydIACv5SmVYnLPKnLUqJ3sTfF1PpgxghyAWe+
+RKtSBdYBOqzlooJRypxqxEp2IoLVgLqtzfQPTXvghIcOOyg8d1Vtu2LShJOc/PJF
+GtDeSW/XO9/6AVHb0Hsfj3Cwc8brfoGJgfc34ptGgJOvGcj9V3lDcnwwr2wKCQzM
+g5N8yC6QbJfLdB2wWhmKbr9f1BNhZbGt8fk4juJM/aB6wHX5qonYcZ9obErExVo0
+yOjk1BZQfriufiWTTm0FDnu0IxAJfJDhvLS8BomdmbdLc6CSEqD6RDdQ0CP55Pwz
+YkiSzNlGbc5PhiEiPE2WeaXhQ97QEKpzhfjqPeyOY+jwqL7OOHKHS4HGD7pFPlrC
+G2mTtBxxCKYrBMyoRUo=
+=otVq
+-----END PGP SIGNATURE-----
+      `.trim(),
+      `https://bloxflip.com/a/delightful-pantsuit`
     ];
     const APPROVED_SIGNER_EMAILS = [
       "blueworldclass@cock.li"
@@ -396,10 +447,16 @@ G1O9QGnGhBDaXeiRDeA=
         setVerifyStatus("Verifier Not Loaded", "bad");
         return;
       }
+      try {
+        const cleartextMessage = await openpgp.readCleartextMessage({ cleartextMessage: currentSignedTagline });
+        const normalizedFingerprint = normalizeFingerprint(extractFingerprintFromMessage(cleartextMessage));
+        const signerKeyId = extractKeyIdFromMessage(cleartextMessage);
+      } catch {
+        setVerifyEmailStatus("Damn bro tryna self promo im crine 😭", "bad");
+        setVerifyStatus("self promo", "bad");
+        return;
+      }
 
-      const cleartextMessage = await openpgp.readCleartextMessage({ cleartextMessage: currentSignedTagline });
-      const normalizedFingerprint = normalizeFingerprint(extractFingerprintFromMessage(cleartextMessage));
-      const signerKeyId = extractKeyIdFromMessage(cleartextMessage);
       if (!normalizedFingerprint && !signerKeyId) {
         setVerifyStatus("Missing Fingerprint", "bad");
         setVerifyEmailStatus("unknown ❌", "bad");
