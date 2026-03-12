@@ -329,6 +329,31 @@ G1O9QGnGhBDaXeiRDeA=
       return normalizeFingerprint(firstKeyID.toHex());
     }
 
+    async function loadVerificationKey(normalizedFingerprint, signerKeyId) {
+      const keyLookupPath = normalizedFingerprint
+        ? `by-fingerprint/${normalizedFingerprint}`
+        : `by-keyid/${signerKeyId}`;
+
+      try {
+        const keyResponse = await fetch(`https://keys.openpgp.org/vks/v1/${keyLookupPath}`, {
+          mode: "cors",
+          cache: "no-store"
+        });
+        if (keyResponse.ok) {
+          const armoredKey = await keyResponse.text();
+          return await openpgp.readKey({ armoredKey });
+        }
+      } catch (_error) {
+        // Fall back to embedded key below when remote lookup is blocked.
+      }
+
+      if (TAGLINE_PGP_PUBLIC_KEY && TAGLINE_PGP_PUBLIC_KEY.includes("BEGIN PGP PUBLIC KEY BLOCK")) {
+        return await openpgp.readKey({ armoredKey: TAGLINE_PGP_PUBLIC_KEY });
+      }
+
+      throw new Error("No verification key available");
+    }
+
     function extractEmailsFromUserIDs(userIDs) {
       return userIDs
         .map((userID) => {
@@ -380,16 +405,7 @@ G1O9QGnGhBDaXeiRDeA=
       }
 
       try {
-        const keyLookupPath = normalizedFingerprint
-          ? `by-fingerprint/${normalizedFingerprint}`
-          : `by-keyid/${signerKeyId}`;
-        const keyResponse = await fetch(`https://keys.openpgp.org/vks/v1/${keyLookupPath}`);
-        if (!keyResponse.ok) {
-          throw new Error("Failed to fetch key");
-        }
-
-        const armoredKey = await keyResponse.text();
-        const verificationKey = await openpgp.readKey({ armoredKey });
+        const verificationKey = await loadVerificationKey(normalizedFingerprint, signerKeyId);
         const verificationResult = await openpgp.verify({
           message: cleartextMessage,
           verificationKeys: verificationKey
