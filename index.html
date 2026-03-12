@@ -288,7 +288,32 @@ G2mTtBxxCKYrBMyoRUo=
 =otVq
 -----END PGP SIGNATURE-----
       `.trim(),
-      `https://bloxflip.com/a/delightful-pantsuit`
+      `https://bloxflip.com/a/delightful-pantsuit`,
+      `
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+ts shouldnt verif
+
+-----BEGIN PGP SIGNATURE-----
+
+wsG7BAEBCgBvBYJpsr7uCRB6x4ku/ROtrUcUAAAAAAAeACBzYWx0QG5vdGF0aW9u
+cy5zZXF1b2lhLXBncC5vcmefnDsqCcrsl+2g0pyueLdp0OKCe3MsEMcA3vn1swbC
+gxYhBMICSdRpvyMHpB78SnrHiS79E62tAADaIA/9GZyOO/zo+CPj1qrs7N0lRzC/
+j9eZlhLwwC8m1ySgGOW4LfpEKawkyAyo3v2KrvyN8ggpYDMLpMKiwSRLhGHmv4EL
+JLcoL3+RVwArttXM+ldGD3OK25ZIAopHfAlbcG7T9NHRmbTd7MM0NmpsAozODT28
+SgiJebZR0OGT2rFetTXlD++FiyFu4WgDCPBFyR0zG37ai01GC6N93NRz8G5qs6sQ
+2vkX2B1GUezs0PbOZnYFRVhS173uuvtojL3KogKjVMDYiP9kx/S6q9wVoSoa/yqB
+qxL8gelU2gZcCRajBZnM7SZyq4GydIACv5SmVYnLPKnLUqJ3sTfF1PpgxghyAWe+
+RKtSBdYBOqzlooJRypxqxEp2IoLVgLqtzfQPTXvghIcOOyg8d1Vtu2LShJOc/PJF
+GtDeSW/XO9/6AVHb0Hsfj3Cwc8brfoGJgfc34ptGgJOvGcj9V3lDcnwwr2wKCQzM
+g5N8yC6QbJfLdB2wWhmKbr9f1BNhZbGt8fk4juJM/aB6wHX5qonYcZ9obErExVo0
+yOjk1BZQfriufiWTTm0FDnu0IxAJfJDhvLS8BomdmbdLc6CSEqD6RDdQ0CP55Pwz
+YkiSzNlGbc5PhiEiPE2WeaXhQ97QEKpzhfjqPeyOY+jwqL7OOHKHS4HGD7pFPlrC
+G2mTtBxxCKYrBMyoRUo=
+=otVq
+-----END PGP SIGNATURE-----
+      `.trim()
     ];
     const APPROVED_SIGNER_EMAILS = [
       "blueworldclass@cock.li"
@@ -447,10 +472,15 @@ G2mTtBxxCKYrBMyoRUo=
         setVerifyStatus("Verifier Not Loaded", "bad");
         return;
       }
+
+      let cleartextMessage;
+      let normalizedFingerprint;
+      let signerKeyId;
+
       try {
-        const cleartextMessage = await openpgp.readCleartextMessage({ cleartextMessage: currentSignedTagline });
-        const normalizedFingerprint = normalizeFingerprint(extractFingerprintFromMessage(cleartextMessage));
-        const signerKeyId = extractKeyIdFromMessage(cleartextMessage);
+        cleartextMessage = await openpgp.readCleartextMessage({ cleartextMessage: currentSignedTagline });
+        normalizedFingerprint = normalizeFingerprint(extractFingerprintFromMessage(cleartextMessage));
+        signerKeyId = extractKeyIdFromMessage(cleartextMessage);
       } catch {
         setVerifyEmailStatus("Damn bro tryna self promo im crine 😭", "bad");
         setVerifyStatus("self promo", "bad");
@@ -459,7 +489,7 @@ G2mTtBxxCKYrBMyoRUo=
 
       if (!normalizedFingerprint && !signerKeyId) {
         setVerifyStatus("Missing Fingerprint", "bad");
-        setVerifyEmailStatus("unknown ❌", "bad");
+        setVerifyEmailStatus("missing fingerprint ❌", "bad");
         return;
       }
 
@@ -487,7 +517,7 @@ G2mTtBxxCKYrBMyoRUo=
         setVerifyEmailStatus(`${linkedEmail} ❌`, "bad");
       } catch (_error) {
         setVerifyStatus("Invalid Signature", "bad");
-        setVerifyEmailStatus("unknown ❌", "bad");
+        setVerifyEmailStatus("invalid signature ❌", "bad");
       }
     }
 
