@@ -387,6 +387,33 @@ vSEMhoiGmxPLVh7/fPc=
       "skye@autistici.org",
       "banecrewsnorts@cocaine.ninja"
     ];
+    const HOLIDAY_TAGLINE_PGP_CLEARSIGNED_MESSAGES = {
+      "03-14": `
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+it is pi day(this was written in 2026 if you couldnt tell)
+
+-----BEGIN PGP SIGNATURE-----
+
+wsG7BAEBCgBvBYJptcK4CRDhNwrXbNwYBUcUAAAAAAAeACBzYWx0QG5vdGF0aW9u
+cy5zZXF1b2lhLXBncC5vcmexSHca8azbAILYopO9DaKVREF4iUYItz/zBqjpGyU3
+2xYhBLFxHQAdiewjMx41T+E3Ctds3BgFAADREw/8CwD7NZH9wwfZ3e0zOm0CP6PY
+R0j9OgZn8kuw0aDV2osM3OHuW0n3Rn1B0utMKW70K0j9/2tRM5e/rBnyBrrvrzdQ
+aZTVJr78JlZhmJ2MmUWQqMnFeuZcMKF7NkB7A4j0OLoQaUFO/+nYk42s3fB2f7oc
+tJ2epopanvf/H3VDxIMAqC9NxLYaHMMtdxPfVvfiyC88q9G88D2sGz5vuL8uNvSM
+rkXWaTF4CrtwJ9wdvtZzCFsKn9eFpu9n4bBbw48Y4Cc30ONxfSl7KMt5vB4fQ6Ns
+ZXUMugI29qIGQrHTq+CmCtLpctdoZULTRvOppHIvAmwPK9QlQDrFfGGKg4cE9XWu
+ggKQGO07WsTa5qWu/R6Lyc3q8ggvW9bLkDFjG8CUFcU/H5Jfw5yX8xHla0eiLzni
+tNYApUdhtPkI/vxbx3mwEJbPpOQ6A5KUNqCEJTl3zIfsUleVD/gChl6FjbxqLQ+u
+Rf4kRHeK1B2yUXuTh7xOcbP3BL0TrkN3VnnQ5zKR/XQ1Wj4E4GEjHxNcK7oIFERu
+vwr7R/s1Ev+Ny88tIfJo4zRoFKVvvjEWyrsqZZaD6Rro2mF3+D7V7ArIzxzSwy5r
+mbXV53D7AVSE0Nz8QseXbimvMmHJ8svewyFl+WiuJnNxI7aWmhZjyHrE0cEezkM1
+fFF+QJyMr2o4bNX1K90=
+=PMM5
+-----END PGP SIGNATURE-----
+      `
+    };
     const KEYSERVER_BASE_URL = "https://keys.openpgp.org/vks/v1";
     const CORS_PROXY_BASE_URL = "https://simple-proxy.itspastelxx.workers.dev/ts-proxy?url=";
     let keyIndex = 0;
@@ -528,34 +555,13 @@ vSEMhoiGmxPLVh7/fPc=
       // Posted by James Hill, modified by community. See post 'Timeline' for change history
       // Retrieved 2026-03-14, License - CC BY-SA 3.0
 
-      var inputDate = new Date("03/14/0");
-      var todaysDate = new Date();
-      if (inputDate.setFullYear(todaysDate.getFullYear()) == todaysDate.setHours(0, 0, 0, 0)) {
-        currentSignedTagline = `
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA512
-
-it is pi day(this was written in 2026 if you couldnt tell)
-
------BEGIN PGP SIGNATURE-----
-
-wsG7BAEBCgBvBYJptcK4CRDhNwrXbNwYBUcUAAAAAAAeACBzYWx0QG5vdGF0aW9u
-cy5zZXF1b2lhLXBncC5vcmexSHca8azbAILYopO9DaKVREF4iUYItz/zBqjpGyU3
-2xYhBLFxHQAdiewjMx41T+E3Ctds3BgFAADREw/8CwD7NZH9wwfZ3e0zOm0CP6PY
-R0j9OgZn8kuw0aDV2osM3OHuW0n3Rn1B0utMKW70K0j9/2tRM5e/rBnyBrrvrzdQ
-aZTVJr78JlZhmJ2MmUWQqMnFeuZcMKF7NkB7A4j0OLoQaUFO/+nYk42s3fB2f7oc
-tJ2epopanvf/H3VDxIMAqC9NxLYaHMMtdxPfVvfiyC88q9G88D2sGz5vuL8uNvSM
-rkXWaTF4CrtwJ9wdvtZzCFsKn9eFpu9n4bBbw48Y4Cc30ONxfSl7KMt5vB4fQ6Ns
-ZXUMugI29qIGQrHTq+CmCtLpctdoZULTRvOppHIvAmwPK9QlQDrFfGGKg4cE9XWu
-ggKQGO07WsTa5qWu/R6Lyc3q8ggvW9bLkDFjG8CUFcU/H5Jfw5yX8xHla0eiLzni
-tNYApUdhtPkI/vxbx3mwEJbPpOQ6A5KUNqCEJTl3zIfsUleVD/gChl6FjbxqLQ+u
-Rf4kRHeK1B2yUXuTh7xOcbP3BL0TrkN3VnnQ5zKR/XQ1Wj4E4GEjHxNcK7oIFERu
-vwr7R/s1Ev+Ny88tIfJo4zRoFKVvvjEWyrsqZZaD6Rro2mF3+D7V7ArIzxzSwy5r
-mbXV53D7AVSE0Nz8QseXbimvMmHJ8svewyFl+WiuJnNxI7aWmhZjyHrE0cEezkM1
-fFF+QJyMr2o4bNX1K90=
-=PMM5
------END PGP SIGNATURE-----
-        `.trim();
+      const todaysDate = new Date();
+      const month = String(todaysDate.getMonth() + 1).padStart(2, "0");
+      const day = String(todaysDate.getDate()).padStart(2, "0");
+      const holidayKey = `${month}-${day}`;
+      const holidayTagline = HOLIDAY_TAGLINE_PGP_CLEARSIGNED_MESSAGES[holidayKey];
+      if (holidayTagline) {
+        currentSignedTagline = holidayTagline.trim();
       }
 
       codeEl.textContent = currentSignedTagline;
