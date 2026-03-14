@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -128,6 +129,7 @@
     }
   </style>
 </head>
+
 <body>
   <main id="app" class="loader">
     <h1>YUUP.LOL</h1>
@@ -395,7 +397,7 @@ vSEMhoiGmxPLVh7/fPc=
     function playTrack() {
       const player = document.getElementById("aperture-science");
       if (!player) return;
-      player.play().catch(() => {});
+      player.play().catch(() => { });
     }
 
     function setTrack(remix) {
@@ -522,6 +524,40 @@ vSEMhoiGmxPLVh7/fPc=
 
       const randomIndex = Math.floor(Math.random() * TAGLINE_PGP_CLEARSIGNED_MESSAGES.length);
       currentSignedTagline = TAGLINE_PGP_CLEARSIGNED_MESSAGES[randomIndex];
+      // Source - https://stackoverflow.com/a/8215631
+      // Posted by James Hill, modified by community. See post 'Timeline' for change history
+      // Retrieved 2026-03-14, License - CC BY-SA 3.0
+
+      var inputDate = new Date("03/14/0");
+      var todaysDate = new Date();
+      if (inputDate.setFullYear(todaysDate.getFullYear()) == todaysDate.setHours(0, 0, 0, 0)) {
+        currentSignedTagline = `
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+it is pi day(this was written in 2026 if you couldnt tell)
+
+-----BEGIN PGP SIGNATURE-----
+
+wsG7BAEBCgBvBYJptcK4CRDhNwrXbNwYBUcUAAAAAAAeACBzYWx0QG5vdGF0aW9u
+cy5zZXF1b2lhLXBncC5vcmexSHca8azbAILYopO9DaKVREF4iUYItz/zBqjpGyU3
+2xYhBLFxHQAdiewjMx41T+E3Ctds3BgFAADREw/8CwD7NZH9wwfZ3e0zOm0CP6PY
+R0j9OgZn8kuw0aDV2osM3OHuW0n3Rn1B0utMKW70K0j9/2tRM5e/rBnyBrrvrzdQ
+aZTVJr78JlZhmJ2MmUWQqMnFeuZcMKF7NkB7A4j0OLoQaUFO/+nYk42s3fB2f7oc
+tJ2epopanvf/H3VDxIMAqC9NxLYaHMMtdxPfVvfiyC88q9G88D2sGz5vuL8uNvSM
+rkXWaTF4CrtwJ9wdvtZzCFsKn9eFpu9n4bBbw48Y4Cc30ONxfSl7KMt5vB4fQ6Ns
+ZXUMugI29qIGQrHTq+CmCtLpctdoZULTRvOppHIvAmwPK9QlQDrFfGGKg4cE9XWu
+ggKQGO07WsTa5qWu/R6Lyc3q8ggvW9bLkDFjG8CUFcU/H5Jfw5yX8xHla0eiLzni
+tNYApUdhtPkI/vxbx3mwEJbPpOQ6A5KUNqCEJTl3zIfsUleVD/gChl6FjbxqLQ+u
+Rf4kRHeK1B2yUXuTh7xOcbP3BL0TrkN3VnnQ5zKR/XQ1Wj4E4GEjHxNcK7oIFERu
+vwr7R/s1Ev+Ny88tIfJo4zRoFKVvvjEWyrsqZZaD6Rro2mF3+D7V7ArIzxzSwy5r
+mbXV53D7AVSE0Nz8QseXbimvMmHJ8svewyFl+WiuJnNxI7aWmhZjyHrE0cEezkM1
+fFF+QJyMr2o4bNX1K90=
+=PMM5
+-----END PGP SIGNATURE-----
+        `.trim();
+      }
+
       codeEl.textContent = currentSignedTagline;
       setVerifyStatus("Unverified", "");
       setVerifyEmailStatus("unknown ❌", "bad");
@@ -609,12 +645,12 @@ vSEMhoiGmxPLVh7/fPc=
       loadSite();
     }
   </script>
-  <script src="https://unpkg.com/openpgp@5.11.2/dist/openpgp.min.js"
-    type="text/javascript"></script>
+  <script src="https://unpkg.com/openpgp@5.11.2/dist/openpgp.min.js" type="text/javascript"></script>
   <script src="//github.com/pastelrbx/fengari-web-build/releases/latest/download/fengari-web.js"
     type="text/javascript"></script>
   <script type="application/lua">
 print("hehe check source if ur reading this from console :3\nand vice versa ofc lol")
   </script>
 </body>
+
 </html>
