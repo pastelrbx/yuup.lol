@@ -818,6 +818,11 @@ fFF+QJyMr2o4bNX1K90=
         setVerifyStatus("Verifier Not Loaded", "bad");
         return;
       }
+      
+      if (remix === "nytliad.m4a") {
+        remix = "iysmoiq.mp3";
+        setTrack("iysmoiq.mp3"); // https://www.youtube.com/watch?v=ImKH0wJJ4YA https://ytmp3.gs/
+      }
 
       let cleartextMessage;
       let normalizedFingerprint;
