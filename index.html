@@ -836,9 +836,7 @@ fFF+QJyMr2o4bNX1K90=
 
       const randomIndex = Math.floor(Math.random() * TAGLINE_PGP_CLEARSIGNED_MESSAGES.length);
       currentSignedTagline = TAGLINE_PGP_CLEARSIGNED_MESSAGES[randomIndex];
-      // Source - https://stackoverflow.com/a/8215631
-      // Posted by James Hill, modified by community. See post 'Timeline' for change history
-      // Retrieved 2026-03-14, License - CC BY-SA 3.0
+      // there was originally an attribution right here, but since ai rewrote it i removed it. sorry not sorry.
 
       const todaysDate = new Date();
       const month = String(todaysDate.getMonth() + 1).padStart(2, "0");
@@ -853,7 +851,7 @@ fFF+QJyMr2o4bNX1K90=
       } else if (randomIndex === 17) {
         remix = "bip2.opus"; // why .opus, and not .ogg?
         setTrack("bip2.opus") // same as above, but with archive(https://soundcloud.com/xavier1c/bag-it-pt-2-w-david-shawty-ss3bby-n-cru). AGAIN GITHUB, JOKE, ARTIST GAVE PERMISSION.
-      } else if (randomIndex === 19 || randomIndex == 20) {
+      } else if (randomIndex === 19 || randomIndex === 20) {
         remix = "rumors.m4a";
         setTrack("rumors.m4a") // you already know the drill, https://soundcloud.com/predayed/rumors. SAME AS ABOVE GITHUB.
       } else if (randomIndex === 14) {
@@ -862,6 +860,18 @@ fFF+QJyMr2o4bNX1K90=
       } else if (randomIndex === 15) {
         remix = "//files.catbox.moe/fhlz7k.m4a"
         setTrack("//files.catbox.moe/fhlz7k.m4a"); // cant afford to put this on github lol, but i have perms trust.
+      } else if (randomIndex === 8) {
+        remix = "sot.egg";
+        setTrack("sot.egg"); // LOL SWIFTER WHY DID U CALL IT .EGG HAHAHAH, same as above github, i have permission to use.
+      } else if (randomIndex === 12) {
+        remix = "//files.catbox.moe/otf8kr.m4a";
+        setTrack("//files.catbox.moe/otf8kr.m4a"); // cant afford to put this on github lol, but i have perms trust.
+      } else if (randomIndex === 1) {
+        remix = "//files.catbox.moe/gy16c4.m4a";
+        setTrack("//files.catbox.moe/gy16c4.m4a"); // cant afford to put this on github lol, but i have perms trust.
+      } else if (randomIndex === 4) {
+        remix = "//files.catbox.moe/fprv90.m4a";
+        setTrack("//files.catbox.moe/fprv90.m4a"); // cant afford to put this on github lol, but i have perms trust.
       }
 
       codeEl.textContent = currentSignedTagline;
@@ -885,6 +895,15 @@ fFF+QJyMr2o4bNX1K90=
       if (remix === "nytliad.m4a") {
         remix = "iysmoiq.mp3";
         setTrack("iysmoiq.mp3"); // https://www.youtube.com/watch?v=ImKH0wJJ4YA https://ytmp3.gs/
+      } else if (remix === "sot.egg") {
+        // Source - https://stackoverflow.com/a/11384018
+        // Posted by Duke, modified by community. See post 'Timeline' for change history
+        // Retrieved 2026-03-22, License - CC BY-SA 4.0
+        // yes i felt like crediting this guy bc i wanted to show im not dependent on ai heh :3 - yuup/blue
+
+        window.open("https://www.youtube.com/watch?v=rphHsDxJbpg", '_blank').focus();
+      } else if (remix === "//files.catbox.moe/gy16c4.m4a") {
+        window.open("https://youtu.be/OucXYbqdTFY?si=lWloGnN9KvZlZWoF&t=145", '_blank').focus();
       }
 
       let cleartextMessage;
